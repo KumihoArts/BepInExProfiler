@@ -2,12 +2,35 @@
 
 Are you a stats-nerd? That's cool, me too.
 
-Per-plugin frame-time profiler for HoneySelect 2, with a companion app for throttling plugins at runtime.
+Per-plugin frame-time profiler for HoneySelect 2 and other BepInEx games, with a companion app for throttling plugins at runtime.
 Made by Sly aka Kumiho -- **v0.3.0 beta**
 
 In active development, so expect updating this thing a lot.
 
 > **Beta.** Works well in testing but there are probably edge cases I haven't hit yet. If something breaks, open an issue and attach your `BepInExProfiler_log.txt`.
+
+---
+
+## Screenshots
+
+![All panels](screenshots/overview.png)
+*All four panels open at once -- Live, Throttle, and Stats*
+
+![Live and Graph](screenshots/graph.png)
+*Live list with four plugins pinned to the graph*
+
+![Throttle active](screenshots/throttle.png)
+*Throttle panel with frame-skip active on several plugins*
+
+![Stats panel](screenshots/stats.png)
+*Stats panel -- frame budget, category breakdown, top offenders*
+
+![Live panel](screenshots/live.png)
+*Live panel sorted by cost with real plugin data*
+
+![In-game overlay](screenshots/ingame-overlay.png)
+*The in-game overlay (Ctrl+P) -- works without the companion app*
+
 ---
 
 ## What it does
@@ -21,7 +44,7 @@ The tool is split into two parts:
 **The companion app (`ProfilerApp.exe`)** is where the actual usability is. It connects to the plugin over a local pipe and gives you:
 - A live sortable table with sparkline history and per-category cost columns
 - A graph panel you can pin specific plugins to
-- A throttle panel with per-plugin /2//4//8//16 frame-skip controls, full disable, and saveable presets
+- A throttle panel with per-plugin ÷2/÷4/÷8/÷16 frame-skip controls, full disable, and saveable presets
 - A stats panel with frame budget breakdown and top offenders
 
 If you're just curious which plugin is killing your FPS, the in-game overlay is fine. If you actually want to do something about it, you need the companion app.
@@ -32,15 +55,23 @@ If you're just curious which plugin is killing your FPS, the in-game overlay is 
 
 I know. An `.exe` from a random modder is a red flag. Here's what it actually is: a WPF desktop app that reads data from the game over a named pipe and draws a window. That's it.
 
-It doesn't make any network connections, doesn't write anywhere outside `Documents\BepInExProfiler\`, doesn't touch the registry, doesn't inject into anything. You can verify this yourself with [Process Monitor](https://learn.microsoft.com/en-us/sysinternals/downloads/procmon) or [VirusTotal](https://www.virustotal.com/gui/home/upload) or [Wireshark](https://www.wireshark.org/), all of which are free tools.
+It doesn't make any network connections, doesn't write anywhere outside `Documents\BepInExProfiler\`, doesn't touch the registry, doesn't inject into anything. You can verify this yourself with [Process Monitor](https://learn.microsoft.com/en-us/sysinternals/downloads/procmon), [VirusTotal](https://www.virustotal.com/gui/home/upload), or [Wireshark](https://www.wireshark.org/), all of which are free tools.
 
 The source isn't public because this is a personal project I'm not ready to open-source. That's a legitimate reason to be skeptical, and I'm not going to tell you not to be. If you'd rather not run it, the in-game overlay (Ctrl+P) works fine on its own. But you just won't have the throttle controls or the detailed panels.
 
 ---
 
+## Compatibility
+
+Built and tested on HoneySelect 2, but the plugin itself doesn't use anything game-specific -- it's pure BepInEx 5.x and Unity APIs. Koikatsu, AI Shoujo, and other games running BepInEx 5 on Mono should work fine. Camera component detection may behave slightly differently depending on the game's setup, but nothing should break.
+
+If you try it on another game and run into issues, open an issue and mention which game.
+
+---
+
 ## Requirements
 
-- HoneySelect 2 + BepInEx 5.x
+- BepInEx 5.x (tested on HS2, should work on KK, KKS, AIS, and similar)
 - Windows 10 or later
 - .NET 4.8 for the companion app (ships with Windows 10 1903+, otherwise grab it [from Microsoft](https://dotnet.microsoft.com/en-us/download/dotnet-framework/net48))
 
@@ -80,7 +111,7 @@ Panels are toggled with the buttons at the top. You can have all four open at on
 
 **Graph** -- scrolling time-series for up to 6 pinned plugins.
 
-**Throttle** -- the main reason to use this tool. Every plugin has buttons to run it at /2//4//8//16 frequency or disable it entirely. Changes take effect immediately. You can save presets if you find a combination that works well for your setup.
+**Throttle** -- the main reason to use this tool. Every plugin has buttons to run it at ÷2/÷4/÷8/÷16 frequency or disable it entirely. Changes take effect immediately. You can save presets if you find a combination that works well for your setup.
 
 **Stats** -- frame budget bar, breakdown by category (Update/Render/Harmony/etc.), top 10 offenders.
 
