@@ -4,9 +4,9 @@ Are you a stats-nerd? That's cool, me too.
 
 Per-plugin frame-time profiler for HoneySelect 2, with a companion app for throttling plugins at runtime.
 Made by Sly aka Kumiho -- **v0.3.0 beta**
+In active development, so expect updating this thing a lot.
 
 > **Beta.** Works well in testing but there are probably edge cases I haven't hit yet. If something breaks, open an issue and attach your `BepInExProfiler_log.txt`.
-
 ---
 
 ## What it does
