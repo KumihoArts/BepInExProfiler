@@ -32,7 +32,7 @@ If you're just curious which plugin is killing your FPS, the in-game overlay is 
 
 I know. An `.exe` from a random modder is a red flag. Here's what it actually is: a WPF desktop app that reads data from the game over a named pipe and draws a window. That's it.
 
-It doesn't make any network connections, doesn't write anywhere outside `Documents\BepInExProfiler\`, doesn't touch the registry, doesn't inject into anything. You can verify this yourself with [Process Monitor](https://learn.microsoft.com/en-us/sysinternals/downloads/procmon) or Virustotal [VirusTotal](https://www.virustotal.com/gui/home/upload) or [Wireshark](https://www.wireshark.org/), all of which are free tools.
+It doesn't make any network connections, doesn't write anywhere outside `Documents\BepInExProfiler\`, doesn't touch the registry, doesn't inject into anything. You can verify this yourself with [Process Monitor](https://learn.microsoft.com/en-us/sysinternals/downloads/procmon) or [VirusTotal](https://www.virustotal.com/gui/home/upload) or [Wireshark](https://www.wireshark.org/), all of which are free tools.
 
 The source isn't public because this is a personal project I'm not ready to open-source. That's a legitimate reason to be skeptical, and I'm not going to tell you not to be. If you'd rather not run it, the in-game overlay (Ctrl+P) works fine on its own. But you just won't have the throttle controls or the detailed panels.
 
