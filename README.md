@@ -15,7 +15,7 @@ In active development, so expect updating this thing a lot.
 
 ![All panels](screenshots/overview.png)
 
-*All four panels open at once -- Live, Throttle, and Stats*
+*All four panels open at once: Live, Throttle, and Stats*
 
 ![Live and Graph](screenshots/graph.png)
 
@@ -27,7 +27,7 @@ In active development, so expect updating this thing a lot.
 
 ![Stats panel](screenshots/stats.png)
 
-*Stats panel -- frame budget, category breakdown, top offenders*
+*Stats panel: frame budget, category breakdown, top offenders*
 
 ![Live panel](screenshots/live.png)
 
@@ -41,7 +41,7 @@ In active development, so expect updating this thing a lot.
 
 ## What it does
 
-Shows you exactly which of your installed plugins are eating frame time -- broken down by Update, LateUpdate, FixedUpdate, Render, Coroutines, and Harmony patch overhead. More importantly, it lets you throttle or disable individual plugins live without touching anything on disk or restarting the game.
+Shows you exactly which of your installed plugins are eating frame time. Broken down by Update, LateUpdate, FixedUpdate, Render, Coroutines, and Harmony patch overhead. More importantly, it lets you throttle or disable individual plugins live without touching anything on disk or restarting the game.
 
 The tool is split into two parts:
 
