@@ -52,7 +52,8 @@ Identifies exactly which BepInEx plugins are consuming your frame time, with liv
 
 ## Usage
 
-The companion app launches automatically when the game starts. If it doesn't, run `ProfilerApp.exe` from `BepInEx/plugins/Kumiho/` manually.
+The companion app can be set to launch automatically when the game starts. If it doesn't the first time, run `ProfilerApp.exe` from `BepInEx/plugins/Kumiho/` manually.
+Then set up automatic launching in the F1 menu.
 
 ### In-game hotkeys
 
