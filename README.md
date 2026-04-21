@@ -1,7 +1,9 @@
 # BepInEx Profiler
 
+Are you a stats-nerd? That's cool, me too.
+
 Per-plugin frame-time profiler for HoneySelect 2, with a companion app for throttling plugins at runtime.
-Made by Kumiho -- **v0.3.0 beta**
+Made by Sly aka Kumiho -- **v0.3.0 beta**
 
 > **Beta.** Works well in testing but there are probably edge cases I haven't hit yet. If something breaks, open an issue and attach your `BepInExProfiler_log.txt`.
 
@@ -31,7 +33,7 @@ I know -- an `.exe` from a random modder is a red flag. Here's what it actually 
 
 It doesn't make any network connections, doesn't write anywhere outside `Documents\BepInExProfiler\`, doesn't touch the registry, doesn't inject into anything. You can verify this yourself with [Process Monitor](https://learn.microsoft.com/en-us/sysinternals/downloads/procmon) or [Wireshark](https://www.wireshark.org/) -- both free tools.
 
-The source isn't public because this is a personal project I'm not ready to open-source. That's a legitimate reason to be skeptical, and I'm not going to tell you not to be. If you'd rather not run it, the in-game overlay (Ctrl+P) works fine on its own -- you just won't have the throttle controls or the detailed panels.
+The source isn't public because this is a personal project I'm not ready to open-source. That's a legitimate reason to be skeptical, and I'm not going to tell you not to be. If you'd rather not run it, the in-game overlay (Ctrl+P) works fine on its own. But you just won't have the throttle controls or the detailed panels.
 
 ---
 
@@ -122,6 +124,7 @@ Install and use at your own risk. I'm not responsible for broken saves, corrupte
 ## Bugs / feedback
 
 Open an [issue](../../issues). Include the log file and what you were doing when it broke.
+Or for small stuff, DM me on discord: sly97.
 
 ---
 
