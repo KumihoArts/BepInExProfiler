@@ -26,7 +26,7 @@ In active development, so expect updating this thing a lot.
 *Stats panel -- frame budget, category breakdown, top offenders*
 
 ![Live panel](screenshots/live.png)
-*Live panel sorted by cost with real plugin data*
+*Live panel sorted by cost with real plugin data, light mode*
 
 ![In-game overlay](screenshots/ingame-overlay.png)
 *The in-game overlay (Ctrl+P) -- works without the companion app*
