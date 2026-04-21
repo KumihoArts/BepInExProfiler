@@ -16,9 +16,26 @@ RESTRICTIONS
   - Rebranding or republishing this software under a different name is
     prohibited.
 
-NO WARRANTY
-  This software is provided "as is", without warranty of any kind, express or
-  implied. The author is not liable for any damages arising from its use.
+DISCLAIMER OF WARRANTIES
+  This software is provided "as is", without warranty of any kind, express
+  or implied, including but not limited to the warranties of merchantability,
+  fitness for a particular purpose, and non-infringement.
+
+  The author makes no guarantees that the software will function correctly
+  with any particular game version, mod setup, or system configuration.
+  Plugin throttling and disabling operates at runtime and may cause
+  unexpected behaviour including but not limited to game crashes, lost
+  progress, or broken save files.
+
+LIMITATION OF LIABILITY
+  In no event shall the author be liable for any direct, indirect,
+  incidental, special, exemplary, or consequential damages arising out of
+  the use or inability to use this software, including but not limited to
+  loss of game data, save file corruption, system instability, or any
+  other damage to software or hardware, even if the author has been advised
+  of the possibility of such damages.
+
+  Use of this software is entirely at your own risk.
 
 CONTACT
   For licensing enquiries, contact via GitHub: github.com/KumihoArts
