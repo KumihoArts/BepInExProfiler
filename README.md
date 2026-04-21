@@ -1,123 +1,128 @@
 # BepInEx Profiler
 
-**Per-plugin frame-time profiler and throttle manager for HoneySelect 2**  
-by [Kumiho](https://github.com/KumihoArts) — v0.3.0 beta
+Per-plugin frame-time profiler for HoneySelect 2, with a companion app for throttling plugins at runtime.
+Made by Kumiho -- **v0.3.0 beta**
 
-Identifies exactly which BepInEx plugins are consuming your frame time, with live per-plugin throttle controls and a full companion app for detailed analysis.
-
----
-
-## Screenshots
-
-*Coming soon*
+> **Beta.** Works well in testing but there are probably edge cases I haven't hit yet. If something breaks, open an issue and attach your `BepInExProfiler_log.txt`.
 
 ---
 
-## Features
+## What it does
 
-- **Live profiling** — tracks every plugin's Update, LateUpdate, FixedUpdate, Render (camera), Harmony patch overhead, and Coroutine cost per frame
-- **Companion app** — WPF desktop app with four panels: Live list, Graph, Throttle controls, and Stats
-- **Per-plugin throttle** — reduce how often a plugin runs (÷2 / ÷4 / ÷8 / ÷16) or disable it entirely, without restarting the game
-- **Capability badges** — `[T]` throttleable, `[D]` disable-only, `[M]` monitor-only, so you know at a glance what can be reduced
-- **Throttle presets** — save and load named throttle configurations
-- **Dark and light theme** — full theme support in the companion app
-- **Export to CSV** — snapshot current profiling data to disk
-- **Settings panel** — adjust font size, rolling average window, and display filters
+Shows you exactly which of your installed plugins are eating frame time -- broken down by Update, LateUpdate, FixedUpdate, Render, Coroutines, and Harmony patch overhead. More importantly, it lets you throttle or disable individual plugins live without touching anything on disk or restarting the game.
+
+The tool is split into two parts:
+
+**The plugin (`BepInExProfiler.dll`)** runs inside the game. On its own you get a basic IMGUI overlay (Ctrl+P to toggle) that lists plugin costs, plus hotkeys for moving it and exporting to CSV. All the configuration lives in the BepInEx F1 menu under `[BepInEx Profiler]`.
+
+**The companion app (`ProfilerApp.exe`)** is where the actual usability is. It connects to the plugin over a local pipe and gives you:
+- A live sortable table with sparkline history and per-category cost columns
+- A graph panel you can pin specific plugins to
+- A throttle panel with per-plugin /2//4//8//16 frame-skip controls, full disable, and saveable presets
+- A stats panel with frame budget breakdown and top offenders
+
+If you're just curious which plugin is killing your FPS, the in-game overlay is fine. If you actually want to do something about it, you need the companion app.
+
+---
+
+## About the .exe
+
+I know -- an `.exe` from a random modder is a red flag. Here's what it actually is: a WPF desktop app that reads data from the game over a named pipe and draws a window. That's it.
+
+It doesn't make any network connections, doesn't write anywhere outside `Documents\BepInExProfiler\`, doesn't touch the registry, doesn't inject into anything. You can verify this yourself with [Process Monitor](https://learn.microsoft.com/en-us/sysinternals/downloads/procmon) or [Wireshark](https://www.wireshark.org/) -- both free tools.
+
+The source isn't public because this is a personal project I'm not ready to open-source. That's a legitimate reason to be skeptical, and I'm not going to tell you not to be. If you'd rather not run it, the in-game overlay (Ctrl+P) works fine on its own -- you just won't have the throttle controls or the detailed panels.
 
 ---
 
 ## Requirements
 
-- HoneySelect 2 with BepInEx 5.x
+- HoneySelect 2 + BepInEx 5.x
 - Windows 10 or later
-- .NET 4.8 (included in Windows 10 1903+, otherwise install from Microsoft)
+- .NET 4.8 for the companion app (ships with Windows 10 1903+, otherwise grab it [from Microsoft](https://dotnet.microsoft.com/en-us/download/dotnet-framework/net48))
 
 ---
 
 ## Installation
 
-1. Download **BepInExProfiler-v0.3.0-beta.zip** from the [Releases](../../releases/latest) page
-2. Extract the zip into your HS2 folder — the structure should look like:
+1. Grab the zip from [Releases](../../releases/latest)
+2. Extract into your HS2 folder -- you want it to end up like:
    ```
-   HoneySelect2/
-     BepInEx/
-       plugins/
-         Kumiho/
-           BepInExProfiler.dll
-           ProfilerApp.exe
+   HoneySelect2/BepInEx/plugins/Kumiho/
+     BepInExProfiler.dll
+     ProfilerApp.exe
    ```
-3. Launch the game — the companion app opens automatically
+3. Launch the game. The companion app should open on its own.
+
+If it doesn't open automatically, check the BepInEx F1 menu -- there's an `Auto-Launch Companion App` toggle under `[BepInEx Profiler]`. You can also just run `ProfilerApp.exe` directly from the folder.
 
 ---
 
-## Usage
+## Controls
 
-The companion app can be set to launch automatically when the game starts. If it doesn't the first time, run `ProfilerApp.exe` from `BepInEx/plugins/Kumiho/` manually.
-Then set up automatic launching in the F1 menu.
-
-### In-game hotkeys
-
-| Hotkey | Action |
-|--------|--------|
-| **F7** | Toggle in-game overlay on/off |
-| **F8** | Move overlay (drag mode) |
-| **F9** | Export snapshot to CSV |
-
-### Companion app panels
-
-| Panel | Description |
-|-------|-------------|
-| **⚡ Live** | Full plugin list sorted by cost. Left-click to pin to Graph, right-click for throttle menu. |
-| **📈 Graph** | Scrolling time-series for up to 6 pinned plugins. |
-| **⚙ Throttle** | Per-plugin throttle buttons. Save/load presets. |
-| **📊 Stats** | Frame budget bar, category breakdown, top offenders. |
-
-### Capability badges
-
-Every plugin in the Throttle and Live panels shows a badge:
-
-| Badge | Meaning |
-|-------|---------|
-| `[T]` | **Throttleable** — frame-skip (÷2/÷4/÷8/÷16) works |
-| `[D]` | **Disable only** — Harmony/coroutine based; throttle has no effect, only ✕ stops it |
-| `[M]` | **Monitor only** — no hooks found; cost is observed but not reducible |
-
-### Settings
-
-Click the **⚙** button in the top bar to open Settings:
-- **Font size** — adjust text size in the Live panel (8–20)
-- **Rolling window** — frames used to average each plugin's cost (10–300)
-- **Hide inactive** — hide plugins with zero measured cost
-- **Hide unnamed** — hide unresolved Harmony entries
+| | |
+|---|---|
+| **Ctrl+P** | Toggle in-game overlay |
+| **Ctrl+M** | Move/resize overlay |
+| **Ctrl+E** | Export snapshot to CSV |
+| **F1** | BepInEx config menu (hotkeys, font size, rolling window, etc.) |
 
 ---
 
-## Files created by the profiler
+## Companion app
 
-| Path | Description |
-|------|-------------|
-| `Documents\BepInExProfiler\window.cfg` | Window layout, theme, and settings |
-| `Documents\BepInExProfiler\presets.json` | Saved throttle presets |
-| `Documents\BepInExProfiler\profiler_*.csv` | Exported snapshots |
-| `BepInEx\plugins\Kumiho\BepInExProfiler_log.txt` | Plugin log — include this when reporting bugs |
+Panels are toggled with the buttons at the top. You can have all four open at once and resize them with the splitters.
 
----
+**Live** -- the main plugin list. Left-click a row to pin it to the graph, right-click for a quick throttle menu. Sortable by any column.
 
-## Known limitations
+**Graph** -- scrolling time-series for up to 6 pinned plugins.
 
-- Plugins that do all their work inside coroutines or Harmony patches show `[D]` and can only be stopped, not throttled
-- Camera/graphics mod components appear in the profiler only after Studio fully loads (~3 seconds after entering Studio)
-- The companion app is Windows-only (WPF / .NET 4.8)
+**Throttle** -- the main reason to use this tool. Every plugin has buttons to run it at /2//4//8//16 frequency or disable it entirely. Changes take effect immediately. You can save presets if you find a combination that works well for your setup.
 
----
+**Stats** -- frame budget bar, breakdown by category (Update/Render/Harmony/etc.), top 10 offenders.
 
-## Reporting bugs
+Each plugin shows a capability badge:
 
-Open an [Issue](../../issues) and attach `BepInExProfiler_log.txt` from `BepInEx/plugins/Kumiho/`.
+- `[T]` -- throttleable. Frame-skip works.
+- `[D]` -- Harmony/coroutine based. Throttle buttons do nothing, but you can still disable it with X.
+- `[M]` -- monitor only. No hooks found, cost is tracked but can't be reduced.
+
+The settings button (top bar) opens a panel for font size, rolling average window, and display filters.
 
 ---
 
-## License
+## Files
 
-© 2026 Kumiho. See [LICENSE](LICENSE) for details.  
-**Personal use only. Do not redistribute.**
+| | |
+|---|---|
+| `Documents\BepInExProfiler\window.cfg` | Layout, theme, settings |
+| `Documents\BepInExProfiler\presets.json` | Throttle presets |
+| `Documents\BepInExProfiler\profiler_*.csv` | CSV exports |
+| `BepInEx\plugins\Kumiho\BepInExProfiler_log.txt` | Log file -- attach this to bug reports |
+
+---
+
+## Known issues
+
+- Plugins that only use Harmony patches or coroutines (`[D]`) can't be throttled, only stopped
+- Camera/graphics components (like HS2Graphics) don't appear until a few seconds after entering Studio
+- If a plugin misbehaves after being disabled, hit Reset all in the Throttle panel
+- Companion app is Windows only
+
+---
+
+## Disclaimer
+
+This tool modifies how plugins execute at runtime. While it doesn't touch any game files or save data, disabling or heavily throttling a plugin mid-session can cause unexpected behaviour -- crashes, missing functionality, broken scenes. If something goes wrong, use Reset all in the Throttle panel, or just restart the game.
+
+Install and use at your own risk. I'm not responsible for broken saves, corrupted scenes, or any other damage to your game or setup.
+
+---
+
+## Bugs / feedback
+
+Open an [issue](../../issues). Include the log file and what you were doing when it broke.
+
+---
+
+*Personal use only -- see [LICENSE](LICENSE). Don't redistribute.*
