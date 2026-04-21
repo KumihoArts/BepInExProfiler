@@ -14,21 +14,27 @@ In active development, so expect updating this thing a lot.
 ## Screenshots
 
 ![All panels](screenshots/overview.png)
+
 *All four panels open at once -- Live, Throttle, and Stats*
 
 ![Live and Graph](screenshots/graph.png)
+
 *Live list with four plugins pinned to the graph*
 
 ![Throttle active](screenshots/throttle.png)
+
 *Throttle panel with frame-skip active on several plugins*
 
 ![Stats panel](screenshots/stats.png)
+
 *Stats panel -- frame budget, category breakdown, top offenders*
 
 ![Live panel](screenshots/live.png)
+
 *Live panel sorted by cost with real plugin data, light mode*
 
 ![In-game overlay](screenshots/ingame-overlay.png)
+
 *The in-game overlay (Ctrl+P) works without the companion app*
 
 ---
