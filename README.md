@@ -180,6 +180,21 @@ Each plugin shows a capability badge:
 
 ---
 
+## Troubleshooting
+
+**Companion app doesn't open on auto-launch?**
+→ You're probably missing the .NET 8 Desktop Runtime. Download the "Windows x64 Desktop Runtime" installer from [Microsoft](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) and run it, then try again.
+
+**Companion app not connecting after it opens?**
+→ Wait a few seconds after the game finishes loading — the plugin needs to finish patching before it starts streaming data.
+→ Check `BepInExProfiler_log.txt` for errors.
+
+**Auto-launch not triggering at all?**
+→ Open the BepInEx config (F1 in-game), find `[BepInEx Profiler]`, and make sure `Auto-Launch Companion App` is enabled.
+→ You can also just run `ProfilerApp.exe` manually from `BepInEx\plugins\Kumiho\`.
+
+---
+
 ## Disclaimer
 
 This tool modifies how plugins execute at runtime. While it doesn't touch any game files or save data, disabling or heavily throttling a plugin mid-session can cause unexpected behaviour -- crashes, missing functionality, broken scenes. If something goes wrong, use Reset all in the Throttle panel, or just restart the game.
